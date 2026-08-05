@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+.stitch/
+
+# stitch raw API dumps (keep public/images)
 
 # debug
 npm-debug.log*
