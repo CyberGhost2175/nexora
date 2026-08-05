@@ -64,7 +64,7 @@ function drawFooter(ctx: Ctx) {
   doc.setFont("NotoSans", "normal");
   doc.setFontSize(8);
   doc.setTextColor(...C.gray);
-  doc.text("Nexora Systems  ·  www.nexora.io", m, pageH - 10);
+  doc.text("Nexora Systems  ·  nexorasystems.kz", m, pageH - 10);
   doc.text(`${page}`, pageW - m, pageH - 10, { align: "right" });
   void lang;
 }

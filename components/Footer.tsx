@@ -23,7 +23,7 @@ export function Footer({ dict, lang }: Props) {
             {dict.footer.contact}
           </Link>
           <a
-            href="https://www.nexora.io"
+            href="https://nexorasystems.kz"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-primary"

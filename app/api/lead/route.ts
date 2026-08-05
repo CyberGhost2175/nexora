@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       "🆕 Новая заявка с сайта Nexora",
       "",
       `📞 Телефон: ${nicePhone}`,
-      `🌐 Источник: ${body.source || "nexora.io form "}`,
+      `🌐 Источник: ${body.source || "nexorasystems.kz / form"}`,
       `🗣 Язык: ${body.lang === "kk" ? "Қазақша" : "Русский"}`,
       `🕒 ${when} (Алматы)`,
     ].join("\n");
