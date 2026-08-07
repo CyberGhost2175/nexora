@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Фирменная палитра: тёмно-синий/графит + светлая основа */
+  --color-brand-950: #0b1424;
+  --color-brand-900: #101b30;
+  --color-brand-800: #16233d;
+  --color-brand-700: #1f3054;
+  --color-brand-600: #2a4070;
+  --color-brand-500: #38538e;
+  --color-brand-100: #dde5f2;
+  --color-brand-50: #eef2f9;
+
+  --color-accent-600: #2563eb;
+  --color-accent-500: #3b82f6;
+
+  --color-canvas: #f5f6f8;
+}
+
+::selection {
+  background: var(--color-brand-100);
+}
