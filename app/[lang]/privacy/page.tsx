@@ -4,6 +4,13 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getDictionary, hasLocale } from "@/lib/i18n";
+import {
+  absoluteUrl,
+  buildLanguageAlternates,
+  defaultOgImage,
+  ogLocaleAlternates,
+  ogLocaleMap,
+} from "@/lib/seo";
 
 export async function generateStaticParams() {
   return [{ lang: "ru" }, { lang: "kk" }];
@@ -15,9 +22,40 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
+
+  const canonical = absoluteUrl(`/${lang}/privacy`);
+
   return {
     title: dict.privacy.metaTitle,
     description: dict.privacy.metaDescription,
+    alternates: {
+      canonical,
+      languages: buildLanguageAlternates("/privacy"),
+    },
+    openGraph: {
+      type: "article",
+      siteName: dict.meta.siteName,
+      title: `${dict.privacy.metaTitle} — ${dict.meta.siteName}`,
+      description: dict.privacy.metaDescription,
+      url: canonical,
+      locale: ogLocaleMap[lang],
+      alternateLocale: ogLocaleAlternates(lang),
+      images: [
+        {
+          url: defaultOgImage.url,
+          width: defaultOgImage.width,
+          height: defaultOgImage.height,
+          type: defaultOgImage.type,
+          alt: dict.meta.ogImageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${dict.privacy.metaTitle} — ${dict.meta.siteName}`,
+      description: dict.privacy.metaDescription,
+      images: [defaultOgImage.url],
+    },
   };
 }
 
@@ -29,8 +67,32 @@ export default async function PrivacyPage({
 
   const dict = await getDictionary(lang);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: dict.privacy.breadcrumbHome,
+        item: absoluteUrl(`/${lang}`),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: dict.privacy.breadcrumbPrivacy,
+        item: absoluteUrl(`/${lang}/privacy`),
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Header dict={dict} lang={lang} />
       <main className="mx-auto w-full max-w-[1400px] px-container-padding py-section-gap lg:px-page-margin">
         <div className="mb-12 max-w-3xl">
