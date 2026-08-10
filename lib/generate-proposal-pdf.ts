@@ -172,20 +172,23 @@ export async function downloadProposalPdf(dict: Dictionary, lang: string) {
   });
 
   ctx.y += 18;
-  doc.setFillColor(...C.blue);
-  doc.roundedRect(ctx.m, ctx.y, 56, 10, 5, 5, "F");
-  doc.setFont("NotoSans", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(...C.white);
-  doc.text(
-    `${dict.pricing.amount} ${dict.pricing.currency}`,
-    ctx.m + 28,
-    ctx.y + 6.5,
-    { align: "center" },
-  );
+  const startPkg = dict.pricing.packages[0];
+  if (startPkg) {
+    doc.setFillColor(...C.blue);
+    doc.roundedRect(ctx.m, ctx.y, 72, 10, 5, 5, "F");
+    doc.setFont("NotoSans", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(...C.white);
+    doc.text(
+      `${dict.pricing.fromPrefix} ${startPkg.price} ${dict.pricing.currency}`,
+      ctx.m + 36,
+      ctx.y + 6.5,
+      { align: "center" },
+    );
+  }
 
   ctx.y += 22;
-  text(ctx, dict.pricing.note, { size: 9, color: C.gray, lh: 4.8 });
+  text(ctx, dict.pricing.customNote, { size: 9, color: C.gray, lh: 4.8 });
 
   // Contact strip on cover
   ctx.y = ctx.pageH - 52;
@@ -287,61 +290,47 @@ export async function downloadProposalPdf(dict: Dictionary, lang: string) {
     ctx.y += Math.min(lines.length, 2) * 4 + 3.5;
   });
 
-  // Pricing
+  // Pricing packages
   ensure(ctx, 55);
   sectionTitle(ctx, dict.pricing.title);
+  text(ctx, dict.pricing.subtitle, { size: 9, color: C.gray, lh: 4.5 });
+  ctx.y += 4;
 
-  doc.setFillColor(...C.blue);
-  doc.roundedRect(ctx.m, ctx.y, ctx.w, 26, 3, 3, "F");
-  doc.setFont("NotoSans", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(200, 210, 255);
-  doc.text(dict.pricing.badge.toUpperCase(), ctx.m + 8, ctx.y + 9);
-  doc.setFont("NotoSans", "bold");
-  doc.setFontSize(18);
-  doc.setTextColor(...C.white);
-  doc.text(
-    `${dict.pricing.amount} ${dict.pricing.currency}`,
-    ctx.m + 8,
-    ctx.y + 19,
-  );
-  ctx.y += 32;
+  for (const pkg of dict.pricing.packages) {
+    ensure(ctx, 42);
+    doc.setFillColor(...C.soft);
+    doc.roundedRect(ctx.m, ctx.y, ctx.w, 36, 2.5, 2.5, "F");
 
-  // Two columns: included / not included
-  ensure(ctx, 50);
-  const half = (ctx.w - 8) / 2;
-  const leftX = ctx.m;
-  const rightX = ctx.m + half + 8;
-  const blockTop = ctx.y;
-
-  doc.setFont("NotoSans", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(...C.ink);
-  doc.text(dict.pricing.includedTitle, leftX, blockTop);
-  doc.setTextColor(...C.gray);
-  doc.text(dict.pricing.excludedTitle, rightX, blockTop);
-
-  let yL = blockTop + 6;
-  let yR = blockTop + 6;
-
-  doc.setFont("NotoSans", "normal");
-  doc.setFontSize(8);
-  for (const item of dict.pricing.included) {
-    doc.setTextColor(...C.blue);
-    doc.text("+", leftX, yL);
+    doc.setFont("NotoSans", "bold");
+    doc.setFontSize(11);
     doc.setTextColor(...C.ink);
-    const lines = doc.splitTextToSize(item, half - 5) as string[];
-    doc.text(lines, leftX + 4, yL);
-    yL += lines.length * 3.8 + 2;
-  }
-  for (const item of dict.pricing.excluded) {
+    doc.text(pkg.name, ctx.m + 6, ctx.y + 8);
+
+    doc.setFont("NotoSans", "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(...C.blue);
+    doc.text(
+      `${dict.pricing.fromPrefix} ${pkg.price} ${dict.pricing.currency}`,
+      ctx.pageW - ctx.m - 6,
+      ctx.y + 8,
+      { align: "right" },
+    );
+
+    doc.setFont("NotoSans", "normal");
+    doc.setFontSize(8);
     doc.setTextColor(...C.gray);
-    doc.text("–", rightX, yR);
-    const lines = doc.splitTextToSize(item, half - 5) as string[];
-    doc.text(lines, rightX + 4, yR);
-    yR += lines.length * 3.8 + 2;
+    const audienceLines = doc.splitTextToSize(
+      pkg.audience,
+      ctx.w - 12,
+    ) as string[];
+    doc.text(audienceLines.slice(0, 2), ctx.m + 6, ctx.y + 15);
+    doc.setTextColor(...C.ink);
+    doc.text(pkg.support, ctx.m + 6, ctx.y + 28);
+    ctx.y += 40;
   }
-  ctx.y = Math.max(yL, yR) + 6;
+
+  text(ctx, dict.pricing.customNote, { size: 8.5, color: C.gray, lh: 4.5 });
+  ctx.y += 4;
 
   // Final contact
   ensure(ctx, 36);

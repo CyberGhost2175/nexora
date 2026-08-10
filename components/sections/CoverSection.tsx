@@ -4,10 +4,7 @@ import type { Dictionary } from "@/lib/i18n";
 
 export function CoverSection({ dict }: { dict: Dictionary }) {
   return (
-    <section
-      className="a4-page border-b border-outline-variant/20 py-section-gap"
-      id="proposal"
-    >
+    <section className="a4-page border-b border-outline-variant/20 py-section-gap">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <div className="mb-10">
@@ -19,12 +16,18 @@ export function CoverSection({ dict }: { dict: Dictionary }) {
           <p className="mb-12 max-w-xl border-l-4 border-primary-container pl-6 text-body-lg text-on-surface-variant">
             {dict.cover.subtitle}
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-4">
             <a
-              href="#pricing"
+              href="#contact"
               className="inline-flex rounded-full bg-primary-container px-8 py-3.5 text-label-sm text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-xl"
             >
-              {dict.cover.cta}
+              {dict.cover.ctaPrimary}
+            </a>
+            <a
+              href="#pricing"
+              className="inline-flex rounded-full border border-outline-variant/50 bg-white/70 px-8 py-3.5 text-label-sm text-on-surface transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-container/40 hover:text-primary"
+            >
+              {dict.cover.ctaSecondary}
             </a>
           </div>
         </div>

@@ -39,19 +39,26 @@ export function ContactSection({
   lang?: string;
 }) {
   const [submitted, setSubmitted] = useState(false);
+  const [company, setCompany] = useState("");
+  const [industry, setIndustry] = useState("");
   const [phone, setPhone] = useState("+7 ");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<"phone" | "company" | null>(null);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState(false);
 
   const handleDemo = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (!company.trim()) {
+      setError("company");
+      return;
+    }
     if (!isValidKzPhone(phone)) {
-      setError(true);
+      setError("phone");
       return;
     }
 
-    setError(false);
+    setError(null);
     setSendError(false);
     setSending(true);
 
@@ -61,6 +68,8 @@ export function ContactSection({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           phone,
+          company: company.trim(),
+          industry: industry.trim(),
           source: "site / demo form",
           lang,
         }),
@@ -94,83 +103,114 @@ export function ContactSection({
             {dict.contact.subtitle}
           </p>
 
-          <div className="mb-16 flex flex-col justify-center gap-6 md:flex-row md:items-center">
-            <a
-              href={`tel:${dict.contact.phone.replace(/\s/g, "")}`}
-              aria-label={dict.contact.phoneAria}
-              className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-10 py-4 text-label-sm font-bold text-primary-container transition-all duration-300 hover:bg-surface hover:shadow-xl"
+          {submitted ? (
+            <div className="mb-16 inline-flex items-center justify-center gap-3 rounded-full border border-white/30 bg-white/10 px-10 py-4 text-label-sm font-bold backdrop-blur-sm">
+              <span className="material-symbols-outlined">check_circle</span>
+              {dict.contact.submitted}
+            </div>
+          ) : (
+            <form
+              onSubmit={handleDemo}
+              className="mx-auto mb-16 flex w-full max-w-xl flex-col gap-3 text-left"
             >
-              <span className="material-symbols-outlined">call</span>
-              {dict.contact.phone}
-            </a>
+              <label className="sr-only" htmlFor="lead-company">
+                {dict.contact.companyLabel}
+              </label>
+              <input
+                id="lead-company"
+                type="text"
+                name="company"
+                autoComplete="organization"
+                required
+                value={company}
+                disabled={sending}
+                onChange={(e) => {
+                  setCompany(e.target.value);
+                  setError(null);
+                  setSendError(false);
+                }}
+                placeholder={dict.contact.companyPlaceholder}
+                aria-invalid={error === "company"}
+                className={`w-full rounded-2xl border bg-white/10 px-5 py-4 text-label-sm text-white placeholder:text-white/60 outline-none backdrop-blur-sm focus:border-white/60 disabled:opacity-60 ${
+                  error === "company" ? "border-red-300" : "border-white/30"
+                }`}
+              />
 
-            {submitted ? (
-              <div className="inline-flex items-center justify-center gap-3 rounded-full border border-white/30 bg-white/10 px-10 py-4 text-label-sm font-bold backdrop-blur-sm">
-                <span className="material-symbols-outlined">check_circle</span>
-                {dict.contact.submitted}
+              <label className="sr-only" htmlFor="lead-industry">
+                {dict.contact.industryLabel}
+              </label>
+              <input
+                id="lead-industry"
+                type="text"
+                name="industry"
+                value={industry}
+                disabled={sending}
+                onChange={(e) => {
+                  setIndustry(e.target.value);
+                  setSendError(false);
+                }}
+                placeholder={dict.contact.industryPlaceholder}
+                className="w-full rounded-2xl border border-white/30 bg-white/10 px-5 py-4 text-label-sm text-white placeholder:text-white/60 outline-none backdrop-blur-sm focus:border-white/60 disabled:opacity-60"
+              />
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <label className="sr-only" htmlFor="lead-phone">
+                  {dict.contact.phoneLabel}
+                </label>
+                <input
+                  id="lead-phone"
+                  type="tel"
+                  name="phone"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  required
+                  value={phone}
+                  disabled={sending}
+                  onChange={(e) => {
+                    setPhone(formatKzPhone(e.target.value));
+                    setError(null);
+                    setSendError(false);
+                  }}
+                  onFocus={() => {
+                    if (phone === "" || phone === "+") setPhone("+7 ");
+                  }}
+                  placeholder={dict.contact.placeholder}
+                  aria-invalid={error === "phone"}
+                  className={`min-w-0 flex-1 rounded-full border bg-white/10 px-5 py-4 text-label-sm text-white placeholder:text-white/60 outline-none backdrop-blur-sm focus:border-white/60 disabled:opacity-60 ${
+                    error === "phone" ? "border-red-300" : "border-white/30"
+                  }`}
+                />
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-4 text-label-sm font-bold backdrop-blur-sm transition-all duration-300 hover:bg-white/20 disabled:cursor-wait disabled:opacity-60"
+                >
+                  <span className="material-symbols-outlined">send</span>
+                  {sending ? "…" : dict.contact.requestDemo}
+                </button>
               </div>
-            ) : (
-              <form
-                onSubmit={handleDemo}
-                className="flex w-full max-w-md flex-col gap-2"
-              >
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <input
-                    type="tel"
-                    name="phone"
-                    inputMode="tel"
-                    autoComplete="tel"
-                    required
-                    value={phone}
-                    disabled={sending}
-                    onChange={(e) => {
-                      setPhone(formatKzPhone(e.target.value));
-                      setError(false);
-                      setSendError(false);
-                    }}
-                    onFocus={() => {
-                      if (phone === "" || phone === "+") setPhone("+7 ");
-                    }}
-                    placeholder={dict.contact.placeholder}
-                    aria-invalid={error}
-                    className={`min-w-0 flex-1 rounded-full border bg-white/10 px-5 py-4 text-label-sm text-white placeholder:text-white/60 outline-none backdrop-blur-sm focus:border-white/60 disabled:opacity-60 ${
-                      error ? "border-red-300" : "border-white/30"
-                    }`}
-                  />
-                  <button
-                    type="submit"
-                    disabled={sending}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-4 text-label-sm font-bold backdrop-blur-sm transition-all duration-300 hover:bg-white/20 disabled:cursor-wait disabled:opacity-60"
-                  >
-                    <span className="material-symbols-outlined">mail</span>
-                    {sending ? "…" : dict.contact.requestDemo}
-                  </button>
-                </div>
-                {error ? (
-                  <p className="px-2 text-left text-sm text-red-200">
-                    {dict.contact.phoneError}
-                  </p>
-                ) : null}
-                {sendError ? (
-                  <p className="px-2 text-left text-sm text-red-200">
-                    {dict.contact.sendError}
-                  </p>
-                ) : null}
-              </form>
-            )}
-          </div>
 
-          <div className="grid grid-cols-1 gap-8 border-t border-white/20 pt-10 text-left text-body-md text-primary-fixed md:grid-cols-2">
-            <div>
-              <p className="mb-2 text-lg font-semibold text-white">
-                {dict.contact.company}
-              </p>
-              <p>{dict.contact.director}</p>
-            </div>
-            <div className="md:text-right">
-              <p className="mb-1 opacity-90">{dict.contact.geo}</p>
-              <p className="opacity-90">{dict.contact.docs}</p>
-            </div>
+              {error === "company" ? (
+                <p className="px-2 text-sm text-red-200">
+                  {dict.contact.companyError}
+                </p>
+              ) : null}
+              {error === "phone" ? (
+                <p className="px-2 text-sm text-red-200">
+                  {dict.contact.phoneError}
+                </p>
+              ) : null}
+              {sendError ? (
+                <p className="px-2 text-sm text-red-200">
+                  {dict.contact.sendError}
+                </p>
+              ) : null}
+            </form>
+          )}
+
+          <div className="border-t border-white/20 pt-10 text-body-md text-primary-fixed">
+            <p className="mb-1 opacity-90">{dict.contact.geo}</p>
+            <p className="opacity-90">{dict.contact.docs}</p>
           </div>
         </div>
       </div>

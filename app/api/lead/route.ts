@@ -15,11 +15,23 @@ export async function POST(request: Request) {
   try {
     const body = (await request.json()) as {
       phone?: string;
+      company?: string;
+      industry?: string;
       source?: string;
       lang?: string;
     };
 
     const phone = (body.phone ?? "").trim();
+    const company = (body.company ?? "").trim();
+    const industry = (body.industry ?? "").trim();
+
+    if (!company) {
+      return NextResponse.json(
+        { ok: false, error: "invalid_company" },
+        { status: 400 },
+      );
+    }
+
     if (!isValidKzPhone(phone)) {
       return NextResponse.json(
         { ok: false, error: "invalid_phone" },
@@ -51,11 +63,15 @@ export async function POST(request: Request) {
     const text = [
       "🆕 Новая заявка с сайта Nexora",
       "",
+      `🏢 Компания: ${company}`,
+      industry ? `🛠 Сфера: ${industry}` : null,
       `📞 Телефон: ${nicePhone}`,
       `🌐 Источник: ${body.source || "nexorasystems.kz / form"}`,
       `🗣 Язык: ${body.lang === "kk" ? "Қазақша" : "Русский"}`,
       `🕒 ${when} (Алматы)`,
-    ].join("\n");
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     const tgRes = await fetch(
       `https://api.telegram.org/bot${token}/sendMessage`,

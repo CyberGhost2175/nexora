@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/Logo";
-import { downloadProposalPdf } from "@/lib/generate-proposal-pdf";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -14,10 +13,9 @@ type Props = {
 export function Header({ dict, lang }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [downloading, setDownloading] = useState(false);
 
   const navLinks = [
-    { href: `/${lang}#proposal`, label: dict.nav.proposal },
+    { href: `/${lang}#product`, label: dict.nav.product },
     { href: `/${lang}#services`, label: dict.nav.services },
     { href: `/${lang}#pricing`, label: dict.nav.pricing },
     { href: `/${lang}#contact`, label: dict.nav.contact },
@@ -37,19 +35,6 @@ export function Header({ dict, lang }: Props) {
     };
   }, [open]);
 
-  const handleDownloadPdf = async () => {
-    if (downloading) return;
-    setDownloading(true);
-    setOpen(false);
-    try {
-      await downloadProposalPdf(dict, lang);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setDownloading(false);
-    }
-  };
-
   return (
     <header
       className={`sticky top-0 z-50 w-full border-b border-outline-variant/20 transition-shadow duration-300 print:hidden ${
@@ -58,7 +43,7 @@ export function Header({ dict, lang }: Props) {
     >
       <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4 px-container-padding py-4 lg:px-page-margin">
         <Link
-          href={`/${lang}#proposal`}
+          href={`/${lang}`}
           className="shrink-0"
           onClick={() => setOpen(false)}
           aria-label="Nexora"
@@ -80,14 +65,12 @@ export function Header({ dict, lang }: Props) {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitch lang={lang} dict={dict} />
-          <button
-            type="button"
-            onClick={handleDownloadPdf}
-            disabled={downloading}
-            className="rounded-full bg-primary-container px-5 py-2.5 text-label-sm text-white transition-all duration-200 hover:bg-primary hover:shadow-lg disabled:cursor-wait disabled:opacity-70"
+          <a
+            href={`/${lang}#contact`}
+            className="rounded-full bg-primary-container px-5 py-2.5 text-label-sm text-white transition-all duration-200 hover:bg-primary hover:shadow-lg"
           >
-            {downloading ? "…" : dict.nav.downloadPdf}
-          </button>
+            {dict.contact.requestDemo}
+          </a>
         </div>
 
         <button
@@ -121,14 +104,13 @@ export function Header({ dict, lang }: Props) {
           ))}
           <div className="mt-3 flex items-center justify-between gap-3 px-1">
             <LanguageSwitch lang={lang} dict={dict} />
-            <button
-              type="button"
-              onClick={handleDownloadPdf}
-              disabled={downloading}
-              className="rounded-full bg-primary-container px-5 py-2.5 text-label-sm text-white transition-all hover:bg-primary disabled:cursor-wait disabled:opacity-70"
+            <a
+              href={`/${lang}#contact`}
+              onClick={() => setOpen(false)}
+              className="rounded-full bg-primary-container px-5 py-2.5 text-label-sm text-white transition-all hover:bg-primary"
             >
-              {downloading ? "…" : dict.nav.downloadPdf}
-            </button>
+              {dict.contact.requestDemo}
+            </a>
           </div>
         </nav>
       </div>

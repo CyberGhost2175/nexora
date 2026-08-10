@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { AudienceSection } from "@/components/sections/AudienceSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { CoverSection } from "@/components/sections/CoverSection";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { SolutionSection } from "@/components/sections/SolutionSection";
@@ -66,6 +69,17 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
   const dict = await getDictionary(lang);
 
+  const packageOffers = dict.pricing.packages.map((pkg) => ({
+    "@type": "Offer",
+    name: pkg.name,
+    price: pkg.price.replace(/\s/g, ""),
+    priceCurrency: "KZT",
+    priceValidUntil: "2026-12-31",
+    availability: "https://schema.org/InStock",
+    url: absoluteUrl(`/${lang}#pricing`),
+    description: pkg.audience,
+  }));
+
   const softwareJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -77,19 +91,13 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
     inLanguage: ["ru", "kk"],
     url: absoluteUrl(`/${lang}`),
     image: defaultOgImage.url,
-    offers: {
-      "@type": "Offer",
-      price: "800000",
-      priceCurrency: "KZT",
-      priceValidUntil: "2026-12-31",
-      availability: "https://schema.org/InStock",
-      url: absoluteUrl(`/${lang}#pricing`),
-    },
+    offers: packageOffers,
     provider: {
       "@type": "Organization",
       name: organization.brandName,
       url: organization.url,
       telephone: organization.telephone,
+      email: dict.contact.email,
     },
     featureList: dict.solution.items.map((item) => item.title),
   };
@@ -103,18 +111,27 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       name: organization.brandName,
       url: organization.url,
       telephone: organization.telephone,
+      email: dict.contact.email,
     },
     areaServed: {
       "@type": "Country",
       name: "Kazakhstan",
     },
-    offers: {
-      "@type": "Offer",
-      price: "800000",
-      priceCurrency: "KZT",
-      availability: "https://schema.org/InStock",
-    },
+    offers: packageOffers,
     description: dict.meta.description,
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: dict.faq.items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   return (
@@ -129,12 +146,20 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Header dict={dict} lang={lang} />
       <main className="mx-auto w-full max-w-[1400px] px-container-padding lg:px-page-margin">
         <CoverSection dict={dict} />
         <ProblemSection dict={dict} />
+        <AudienceSection dict={dict} />
+        <HowItWorksSection dict={dict} />
         <SolutionSection dict={dict} />
         <PricingSection dict={dict} />
+        <FaqSection dict={dict} />
         <ContactSection dict={dict} lang={lang} />
       </main>
       <Footer dict={dict} lang={lang} />
