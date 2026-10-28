@@ -119,30 +119,28 @@ export function Header({ dict, lang }: Props) {
 }
 
 function LanguageSwitch({ lang, dict }: Props) {
+  const options = [
+    { code: "ru" as const, label: dict.lang.ru },
+    { code: "kk" as const, label: dict.lang.kk },
+    { code: "en" as const, label: dict.lang.en },
+  ];
+
   return (
     <div className="flex items-center rounded-full border border-outline-variant/40 bg-white/70 p-1 text-label-sm">
-      <Link
-        href="/ru"
-        className={`rounded-full px-3 py-1.5 transition-colors ${
-          lang === "ru"
-            ? "bg-primary-container text-white"
-            : "text-secondary hover:text-primary"
-        }`}
-        hrefLang="ru"
-      >
-        {dict.lang.ru}
-      </Link>
-      <Link
-        href="/kk"
-        className={`rounded-full px-3 py-1.5 transition-colors ${
-          lang === "kk"
-            ? "bg-primary-container text-white"
-            : "text-secondary hover:text-primary"
-        }`}
-        hrefLang="kk"
-      >
-        {dict.lang.kk}
-      </Link>
+      {options.map((opt) => (
+        <Link
+          key={opt.code}
+          href={`/${opt.code}`}
+          className={`rounded-full px-3 py-1.5 transition-colors ${
+            lang === opt.code
+              ? "bg-primary-container text-white"
+              : "text-secondary hover:text-primary"
+          }`}
+          hrefLang={opt.code}
+        >
+          {opt.label}
+        </Link>
+      ))}
     </div>
   );
 }

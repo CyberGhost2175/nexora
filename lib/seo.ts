@@ -11,11 +11,12 @@ export const SITE_URL = (
 
 /**
  * hreflang-коды для тегов <link rel="alternate"> и Metadata API.
- * ISO-коды: `ru`, `kk` (казахский по BCP-47) + x-default на локаль по умолчанию.
+ * ISO-коды: `ru`, `kk`, `en` + x-default на локаль по умолчанию.
  */
 export const hreflangMap: Record<Locale, string> = {
   ru: "ru",
   kk: "kk",
+  en: "en",
 };
 
 /** Абсолютный URL по относительному пути. */
@@ -29,6 +30,7 @@ export function absoluteUrl(path = "/"): string {
  * {
  *   ru: "https://.../ru/...",
  *   kk: "https://.../kk/...",
+ *   en: "https://.../en/...",
  *   "x-default": "https://.../ru/...",
  * }
  * pathSuffix — часть после /<lang> (например, "/privacy" или "").
@@ -47,6 +49,7 @@ export function buildLanguageAlternates(pathSuffix = ""): Record<string, string>
 export const ogLocaleMap: Record<Locale, string> = {
   ru: "ru_RU",
   kk: "kk_KZ",
+  en: "en_US",
 };
 
 export function ogLocaleAlternates(current: Locale): string[] {

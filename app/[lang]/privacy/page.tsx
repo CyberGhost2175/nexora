@@ -13,7 +13,7 @@ import {
 } from "@/lib/seo";
 
 export async function generateStaticParams() {
-  return [{ lang: "ru" }, { lang: "kk" }];
+  return [{ lang: "ru" }, { lang: "kk" }, { lang: "en" }];
 }
 
 export async function generateMetadata({

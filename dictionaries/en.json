@@ -1,0 +1,331 @@
+{
+  "meta": {
+    "siteName": "Nexora Systems",
+    "titleDefault": "CRM for service and repair companies — Nexora Systems",
+    "titleTemplate": "%s | Nexora Systems",
+    "description": "Nexora is a simple CRM for service and repair companies: tickets, technicians, warehouse, payments and analytics in one system. Free demo and go-live in 2 weeks.",
+    "ogTitle": "Nexora Systems — CRM for service companies",
+    "ogDescription": "Tickets, technicians, warehouse, payments and analytics in one system. Free demo and setup tailored to your process.",
+    "ogImageAlt": "Nexora Systems — CRM for service and repair companies",
+    "keywords": [
+      "CRM for service companies",
+      "CRM for repair",
+      "ticket management",
+      "field service system",
+      "CRM Kazakhstan",
+      "Nexora Systems"
+    ]
+  },
+  "nav": {
+    "product": "Product",
+    "services": "Features",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "downloadPdf": "Download PDF",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "cover": {
+    "title": "Ticket management system for service and repair companies",
+    "subtitle": "All tickets, technicians, warehouse and payments — in one place. Less confusion, faster replies to customers, easier growth.",
+    "ctaPrimary": "Request a demo",
+    "ctaSecondary": "See pricing"
+  },
+  "problem": {
+    "title": "Sound familiar?",
+    "items": [
+      {
+        "icon": "person_cancel",
+        "title": "Tickets get lost",
+        "text": "Customer requests stay in chats, notebooks and spreadsheets. While you search for a number, the client has already gone elsewhere."
+      },
+      {
+        "icon": "calendar_clock",
+        "title": "Schedule chaos",
+        "text": "Technicians run late, mix up addresses or sit idle while the dispatcher manually coordinates the day."
+      },
+      {
+        "icon": "inventory_2",
+        "title": "Unknown warehouse stock",
+        "text": "Unclear what parts are available and what is missing. That leads to failed visits and lost revenue."
+      },
+      {
+        "icon": "payments",
+        "title": "Hard to track money",
+        "text": "Difficult to see who earned how much, what clients paid and what the real profit is."
+      },
+      {
+        "icon": "build_circle",
+        "title": "Clients are forgotten",
+        "text": "No reminders for planned maintenance. Regular clients leave because nobody followed up in time."
+      },
+      {
+        "icon": "group_off",
+        "title": "Team is out of sync",
+        "text": "Technicians, dispatcher and office work in different places. Tasks get duplicated and time is wasted."
+      }
+    ]
+  },
+  "audience": {
+    "title": "Who it is for",
+    "subtitle": "If your team visits clients or takes equipment in for repair — Nexora brings the work into one place.",
+    "items": [
+      {
+        "icon": "ac_unit",
+        "title": "Cooling & climate",
+        "text": "Repair of refrigeration and HVAC equipment"
+      },
+      {
+        "icon": "local_fire_department",
+        "title": "Heating",
+        "text": "Service for boilers and heating equipment"
+      },
+      {
+        "icon": "kitchen",
+        "title": "Home appliances",
+        "text": "Repair and on-site appliance service"
+      },
+      {
+        "icon": "computer",
+        "title": "IT & office tech",
+        "text": "Support for computers and office equipment"
+      },
+      {
+        "icon": "directions_car",
+        "title": "Auto service",
+        "text": "Tickets, technicians and warehouse in one flow"
+      },
+      {
+        "icon": "cleaning_services",
+        "title": "Cleaning",
+        "text": "Visits, crew schedules and payment control"
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "subtitle": "A clear path from request to go-live — without extra bureaucracy.",
+    "timeline": "Go-live from 2 weeks",
+    "steps": [
+      {
+        "step": "01",
+        "title": "Submit a request",
+        "text": "Briefly tell us about your company and industry — we will get in touch and agree on a convenient time."
+      },
+      {
+        "step": "02",
+        "title": "Review processes on a demo call",
+        "text": "We show the system on your scenarios and agree which modules you need at the start."
+      },
+      {
+        "step": "03",
+        "title": "Configure and migrate data",
+        "text": "We set up roles, statuses and forms, and migrate your client base to fit your process."
+      },
+      {
+        "step": "04",
+        "title": "Launch and train the team",
+        "text": "We train the administrator and technicians and support you through the first weeks."
+      }
+    ]
+  },
+  "solution": {
+    "badge": "System capabilities",
+    "title": "What Nexora gives you",
+    "items": [
+      {
+        "title": "Ready CRM for service work",
+        "text": "Tickets, technicians, planned maintenance, warehouse, workshop, payment close-out and analytics — already in one system."
+      },
+      {
+        "title": "Built around your process",
+        "text": "We enable the modules you need, remove extras, and tune fields, statuses, roles and print forms for your business."
+      },
+      {
+        "title": "Roles that match real work",
+        "text": "Administrator, manager, staff and partner technicians — each with their own permissions and screen."
+      },
+      {
+        "title": "Tickets from creation to act",
+        "text": "Statuses, priorities, technician assignment, comments, photos, parts and a public act for the client without CRM login."
+      },
+      {
+        "title": "Maps and routes",
+        "text": "Yandex Maps for the office, daily route for the technician, stop order optimization and jump to 2GIS."
+      },
+      {
+        "title": "Planned maintenance",
+        "text": "Maintenance by partners and sites: monthly progress, notes, PDF acts and quick conversion of a breakdown into a repair ticket."
+      },
+      {
+        "title": "Warehouse and “In service”",
+        "text": "Stock levels and parts write-off into a ticket, workshop equipment tracking, photos and return to the client."
+      },
+      {
+        "title": "Money and technician KPIs",
+        "text": "Income, expense, profit, technician and cash share on close-out. Summary: taken, closed, earned."
+      },
+      {
+        "title": "Analytics for management",
+        "text": "KPIs for tickets, overdue work, revenue and profit. Status trends and technician performance."
+      },
+      {
+        "title": "Growth after launch",
+        "text": "Custom features, new reports and integrations, ongoing support and deployment on your infrastructure."
+      }
+    ],
+    "imageAlt": "Nexora team: CRM development plan"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Two clear packages to start. We confirm the final module set on the demo.",
+    "currency": "₸",
+    "fromPrefix": "from",
+    "labels": {
+      "audience": "Best for",
+      "includes": "Includes",
+      "mobile": "Mobile work",
+      "addons": "Can add later",
+      "training": "Technicians & training",
+      "support": "Annual support"
+    },
+    "packages": [
+      {
+        "name": "Start",
+        "price": "500 000",
+        "audience": "A small workshop without chain clients and planned maintenance",
+        "includes": "Tickets, dispatch, roles, ticket finance, analytics, notifications, map and routes",
+        "mobile": "Web version for technicians (/master) on a phone",
+        "addons": "Any module from the price list — as you grow",
+        "training": "Up to 10 people",
+        "support": "from 130 000₸/year"
+      },
+      {
+        "name": "Business",
+        "price": "1 200 000",
+        "featured": true,
+        "audience": "Companies with chain partners, planned maintenance and a warehouse",
+        "includes": "Everything in Start + Partners, Planned maintenance, Warehouse, Acts, Equipment in service, Landing page with a form",
+        "mobile": "Full mobile app (iOS/Android)",
+        "addons": "1C integration, custom development",
+        "training": "Up to 10 people, then a per-seat surcharge",
+        "support": "from 250 000₸/year"
+      }
+    ],
+    "customNote": "Need a different module set? We will assemble it for you — let’s discuss it on the demo"
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Short answers before the demo call — no empty promises.",
+    "items": [
+      {
+        "question": "Do we need our own server?",
+        "answer": "Not necessarily. You can deploy on your own server or use a cloud option. Cloud hosting, if you do not have a server, is billed separately."
+      },
+      {
+        "question": "What happens to our data if we stop working together?",
+        "answer": "The data belongs to you. On request we will export the database in an agreed format so you can continue outside Nexora. Transfer details are fixed at launch."
+      },
+      {
+        "question": "How long does implementation take?",
+        "answer": "A typical go-live takes from 2 weeks: demo call, module setup, data migration and team training. Timing depends on module scope and how ready your source data is."
+      },
+      {
+        "question": "Can we start with a small module set and add more later?",
+        "answer": "Yes. Many teams start with the basics, then add planned maintenance, warehouse or analytics once the process is stable in the system."
+      },
+      {
+        "question": "How does support work after launch?",
+        "answer": "Implementation includes support at the start. Then annual support: from 130 000₸/year for Start and from 250 000₸/year for Business. It covers updates, help with day-to-day questions and access to new modules."
+      }
+    ]
+  },
+  "contact": {
+    "title": "See the system in action",
+    "subtitle": "Leave your contacts — we will run a free demo and review the needs of your service business.",
+    "phone": "+7 775 000 21 75",
+    "phoneAria": "Call",
+    "email": "info@nexorasystems.kz",
+    "emailAria": "Send email",
+    "companyLabel": "Company",
+    "companyPlaceholder": "Company name",
+    "industryLabel": "Industry",
+    "industryPlaceholder": "What do you do? E.g. HVAC equipment repair",
+    "phoneLabel": "Phone",
+    "placeholder": "+7 7__ ___ __ __",
+    "phoneError": "Enter a phone number in +7 7XX XXX XX XX format",
+    "companyError": "Enter the company name",
+    "sendError": "Could not submit the request. Please try again or call us.",
+    "requestDemo": "Request a demo",
+    "submitted": "Request received — we will contact you",
+    "company": "IE Nexora",
+    "director": "Director: Karabek Asanali Kairatuly",
+    "geo": "We work across Kazakhstan.",
+    "docs": "We provide all closing documents."
+  },
+  "footer": {
+    "contact": "Contact",
+    "site": "nexorasystems.kz",
+    "privacy": "Privacy",
+    "rights": "© 2026 Nexora. All rights reserved.",
+    "downloadPdf": "Download PDF proposal",
+    "whatsapp": "WhatsApp",
+    "whatsappAria": "Message on WhatsApp",
+    "instagram": "Instagram",
+    "instagramAria": "Nexora on Instagram",
+    "socialTitle": "Stay in touch"
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy",
+    "metaDescription": "How Nexora Systems collects, stores and protects personal data of clients and website visitors. Clear rules, your rights and operator contacts.",
+    "breadcrumbHome": "Home",
+    "breadcrumbPrivacy": "Privacy Policy",
+    "title": "Privacy Policy",
+    "updated": "Updated: August 5, 2026",
+    "intro": "We treat your data carefully. Below are simple rules: what we collect, why and how we protect it.",
+    "sections": [
+      {
+        "title": "1. Who we are",
+        "text": "The data operator is IE Nexora (Kazakhstan). Contact: Karabek Asanali Kairatuly, phone +7 775 000 21 75, website nexorasystems.kz."
+      },
+      {
+        "title": "2. What data we collect",
+        "text": "Company name, industry and phone number you leave in a demo request. Technical website data: IP address, browser type, pages viewed — only to keep the service stable."
+      },
+      {
+        "title": "3. Why we need it",
+        "text": "To contact you about your request, show the system, answer questions and improve the website. We do not use data for spam and do not sell it to third parties."
+      },
+      {
+        "title": "4. How we store and protect it",
+        "text": "Data is stored on secured servers. Access is limited to employees who need it for their work. We use reasonable technical and organizational safeguards."
+      },
+      {
+        "title": "5. Who we may share it with",
+        "text": "Only if required by the law of the Republic of Kazakhstan, or if you asked us to. With processing partners — only to the extent needed to run the website and contact you."
+      },
+      {
+        "title": "6. How long we keep it",
+        "text": "Website requests — while correspondence continues and for a reasonable period after, then we delete or anonymize them. The period can be shortened at your request unless the law requires otherwise."
+      },
+      {
+        "title": "7. Your rights",
+        "text": "You may request access to your data, correction, deletion or restriction of processing. Write or call us — we will respond within a reasonable time."
+      },
+      {
+        "title": "8. Cookies and analytics",
+        "text": "The site may use necessary cookies for pages to work. If we enable analytics, it helps us understand which sections are useful. You can limit cookies in browser settings."
+      },
+      {
+        "title": "9. Policy changes",
+        "text": "We may update this text. The current version is always on this page. The update date is shown above."
+      }
+    ],
+    "back": "Back to home"
+  },
+  "lang": {
+    "ru": "РУС",
+    "kk": "ҚАЗ",
+    "en": "ENG"
+  }
+}

@@ -125,14 +125,23 @@ export async function downloadProposalPdf(dict: Dictionary, lang: string) {
   ctx.w = ctx.pageW - ctx.m * 2;
 
   const kk = lang === "kk";
-  const date = new Date().toLocaleDateString(kk ? "kk-KZ" : "ru-RU", {
+  const en = lang === "en";
+  const dateLocale = kk ? "kk-KZ" : en ? "en-US" : "ru-RU";
+  const date = new Date().toLocaleDateString(dateLocale, {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
   const directorName = dict.contact.director
     .replace(/^Руководитель:\s*/i, "")
-    .replace(/^Басшы:\s*/i, "");
+    .replace(/^Басшы:\s*/i, "")
+    .replace(/^Director:\s*/i, "");
+  const proposalLabel = kk
+    ? "Коммерциялық ұсыныс"
+    : en
+      ? "Commercial proposal"
+      : "Коммерческое предложение";
+  const contactsLabel = en ? "Contacts" : "Контакты";
 
   // ─── Cover ───
   doc.setFillColor(...C.soft);
@@ -149,7 +158,7 @@ export async function downloadProposalPdf(dict: Dictionary, lang: string) {
     lh: 6,
   });
   ctx.y += 2;
-  text(ctx, kk ? "Коммерциялық ұсыныс" : "Коммерческое предложение", {
+  text(ctx, proposalLabel, {
     size: 9,
     color: C.gray,
     lh: 5,
@@ -199,7 +208,7 @@ export async function downloadProposalPdf(dict: Dictionary, lang: string) {
   doc.roundedRect(ctx.m, ctx.y, ctx.w, 28, 3, 3, "S");
 
   ctx.y += 9;
-  text(ctx, kk ? "Контакты" : "Контакты", {
+  text(ctx, contactsLabel, {
     x: ctx.m + 6,
     size: 8,
     color: C.gray,
@@ -361,6 +370,8 @@ export async function downloadProposalPdf(dict: Dictionary, lang: string) {
   doc.save(
     kk
       ? "Nexora-kommerciyalyq-usynys.pdf"
-      : "Nexora-kommercheskoe-predlozhenie.pdf",
+      : en
+        ? "Nexora-commercial-proposal.pdf"
+        : "Nexora-kommercheskoe-predlozhenie.pdf",
   );
 }

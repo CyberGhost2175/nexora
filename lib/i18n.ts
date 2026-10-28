@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 const dictionaries = {
   ru: () => import("@/dictionaries/ru.json").then((m) => m.default),
   kk: () => import("@/dictionaries/kk.json").then((m) => m.default),
+  en: () => import("@/dictionaries/en.json").then((m) => m.default),
 };
 
-export const locales = ["ru", "kk"] as const;
+export const locales = ["ru", "kk", "en"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "ru";
 

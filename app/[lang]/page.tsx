@@ -88,7 +88,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
     applicationCategory: "BusinessApplication",
     applicationSubCategory: "CRM",
     operatingSystem: "Web",
-    inLanguage: ["ru", "kk"],
+    inLanguage: ["ru", "kk", "en"],
     url: absoluteUrl(`/${lang}`),
     image: defaultOgImage.url,
     offers: packageOffers,

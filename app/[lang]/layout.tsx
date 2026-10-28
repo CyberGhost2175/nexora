@@ -20,7 +20,7 @@ const inter = Inter({
 });
 
 export async function generateStaticParams() {
-  return [{ lang: "ru" }, { lang: "kk" }];
+  return [{ lang: "ru" }, { lang: "kk" }, { lang: "en" }];
 }
 
 export const viewport: Viewport = {
@@ -131,7 +131,7 @@ export default async function LangLayout({
         telephone: organization.telephone,
         contactType: "sales",
         areaServed: organization.areaServed,
-        availableLanguage: ["ru", "kk"],
+        availableLanguage: ["ru", "kk", "en"],
       },
     ],
     ...(organization.sameAs.length > 0 ? { sameAs: organization.sameAs } : {}),

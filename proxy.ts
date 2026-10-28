@@ -19,6 +19,7 @@ function getPreferredLocale(request: NextRequest): string {
   for (const { tag } of preferred) {
     if (tag.startsWith("kk")) return "kk";
     if (tag.startsWith("ru")) return "ru";
+    if (tag.startsWith("en")) return "en";
   }
 
   return defaultLocale;

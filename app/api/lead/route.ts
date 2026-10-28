@@ -67,7 +67,13 @@ export async function POST(request: Request) {
       industry ? `🛠 Сфера: ${industry}` : null,
       `📞 Телефон: ${nicePhone}`,
       `🌐 Источник: ${body.source || "nexorasystems.kz / form"}`,
-      `🗣 Язык: ${body.lang === "kk" ? "Қазақша" : "Русский"}`,
+      `🗣 Язык: ${
+        body.lang === "kk"
+          ? "Қазақша"
+          : body.lang === "en"
+            ? "English"
+            : "Русский"
+      }`,
       `🕒 ${when} (Алматы)`,
     ]
       .filter(Boolean)
